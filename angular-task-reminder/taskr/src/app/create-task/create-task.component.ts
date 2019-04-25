@@ -16,10 +16,11 @@ export class CreateTaskComponent implements OnInit {
   createFailed = false;
   task = new Task();
   users;
+  dt1; 
   constructor(private taskService: TaskService,
               private userService: UserService) { }
 
-  createTask(task, token) {
+  createTask() {
     this.taskService.createTask(this.task, this.token)
       .subscribe(data => {
         if (!data) {
@@ -28,6 +29,9 @@ export class CreateTaskComponent implements OnInit {
       });
   }
 
+  // bleh(){
+  //   console.log(this.task.deadline+this.task.title+this.task.assignedTo);
+  // }
   getUsers() {
     this.userService.getUsers()
       .subscribe(data => {
@@ -39,7 +43,7 @@ export class CreateTaskComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
   }
 
 }

@@ -20,15 +20,19 @@ export class TaskService {
     }
   }
 
-  getTasks(user): Observable<Task[]> {
-    return this.http.get<Task[]>(this.getTasksUrl);
+  getTasks(user:string): Observable<Task[]> {
+    return this.http.get<Task[]>(this.getTasksUrl+user)
+    .pipe(
+      catchError(this.handleError<Task[]>(null))
+    );
   }
 
   createTask(task:Task,token:string) {
+    console.log('token:'+token);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': token
+        'Authorization': 'Token '+token
       })
     };
 

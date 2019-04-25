@@ -1,14 +1,20 @@
 <div *ngIf="token" class="border border-light p-5">
     <p class="h4 mb-4 text-center">Create Task</p>
 
-    <select class="browser-default custom-select mb-4" id="select">
-        <option value="" disabled="" selected="">Choose your option</option>
+    <select [(ngModel)]="task.assignedTo" class="browser-default custom-select mb-4" id="select">
+        <option disabled="" selected="">Choose your option</option>
         <option value="{{user.id}}" *ngFor="let user of users">{{user.username}}</option>
     </select>
 
-    <label for="textInput">Text input Label</label>
-    <input type="text" id="textInput" class="form-control mb-4" placeholder="Text input">
+    <input type="text" id="textInput" class="form-control mb-4" placeholder="Task Description" [(ngModel)]="task.title">
 
-    <button class="btn btn-info btn-block my-4" type="submit">Create !</button>
+    <label class="example-input-wrapper">
+        <input [(ngModel)]="task.deadline" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+        <owl-date-time #dt1></owl-date-time>
+    </label>
+
+    <button class="btn btn-info btn-block my-4" (click)="createTask()">Create !</button>
+
+    <div *ngIf="createFailed"><p style="color:red">401 Token Authentication Error</p></div>
 
 </div>

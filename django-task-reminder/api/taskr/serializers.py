@@ -4,7 +4,8 @@ from .models import Task
 from django.contrib.auth.models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
+
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -24,7 +25,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # fields = ('id', 'username', 'email')
+        fields = '__all__'
+        fields = ('id', 'username', 'email','password')
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        fields = ('id', 'username')
 
 
 class TaskSerializer(serializers.ModelSerializer):

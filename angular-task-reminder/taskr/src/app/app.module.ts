@@ -8,16 +8,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateTaskComponent } from './create-task/create-task.component';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewTaskComponent } from './view-task/view-task.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

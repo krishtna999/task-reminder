@@ -1,0 +1,27 @@
+<div class="border border-light p-5">
+    <p class="h4 mb-4 text-center">View Tasks</p>
+
+    <select [(ngModel)]="queryUser" (ngModelChange)="getTasks()" class="browser-default custom-select mb-4" id="select">
+        <option disabled="" selected="">Choose your option</option>
+        <option value="{{user.username}}" *ngFor="let user of users">{{user.username}}</option>
+    </select>
+    <div *ngIf="is404"><p style="color: red">404, User not found :(    I mean, who even asked you to edit the fields</p></div>
+    <table class="table" *ngIf="queryUser">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Deadline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <th scope="row">{{task.title}}</th>
+            <td>{{task.createdBy}}</td>
+            <td>{{task.assignedTo}}</td>
+            <td>{{task.deadline | date: "dd/MM/yy hh:mm a"}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
