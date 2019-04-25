@@ -31,7 +31,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         if(name == 'all'):
             return Task.objects.all()
         user = get_object_or_404(User,username=name) 
-        # User.objects.get(username=name)
         queryset = Task.objects.filter(assignedTo=user)
         return queryset
         

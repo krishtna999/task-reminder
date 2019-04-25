@@ -1,0 +1,36 @@
+<div class="form-box">
+    <div class="border border-light p-5">
+
+        <p class="h4 mb-4 text-center">Sign in</p>
+    
+        <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username"
+        [(ngModel)]="user.username">
+    
+        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"
+        [(ngModel)]="user.password">
+    
+        <div class="d-flex justify-content-between">
+            <div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                    <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                </div>
+            </div>
+            <div>
+                <a href="">Forgot password?</a>
+            </div>
+        </div>
+    
+        <button class="btn btn-info btn-block my-4" type="submit" (click)="getToken()">Sign in</button>
+    
+        <div *ngIf="wrongCredentials"><p class="text-p" style="color:red" >Wrong Password !</p></div>
+
+        <div class="text-center">
+            <p>Not a member?
+                <a href="">Register</a>
+            </p>
+        </div>
+        
+      </div>
+</div>
+<app-create-task [token]="token"></app-create-task>

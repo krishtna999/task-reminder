@@ -1,0 +1,14 @@
+<div *ngIf="token" class="border border-light p-5">
+    <p class="h4 mb-4 text-center">Create Task</p>
+
+    <select class="browser-default custom-select mb-4" id="select">
+        <option value="" disabled="" selected="">Choose your option</option>
+        <option value="{{user.id}}" *ngFor="let user of users">{{user.username}}</option>
+    </select>
+
+    <label for="textInput">Text input Label</label>
+    <input type="text" id="textInput" class="form-control mb-4" placeholder="Text input">
+
+    <button class="btn btn-info btn-block my-4" type="submit">Create !</button>
+
+</div>
