@@ -3,6 +3,7 @@ import { TaskService } from '../task.service';
 import { Task } from '../task';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-task',
@@ -16,9 +17,10 @@ export class CreateTaskComponent implements OnInit {
   createFailed = false;
   task = new Task();
   users;
-  dt1; 
+  dt1;
   constructor(private taskService: TaskService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private router:Router) { }
 
   createTask() {
     this.taskService.createTask(this.task, this.token)
@@ -35,14 +37,20 @@ export class CreateTaskComponent implements OnInit {
   getUsers() {
     this.userService.getUsers()
       .subscribe(data => {
-          this.users=data["results"];
-          console.log(this.users);
-        });
+        this.users = data["results"];
+        console.log(this.users);
+      });
   }
 
 
 
   ngOnInit() {
+    if (this.userService.token) {
+      this.token = this.userService.token;
+    } else {
+      // User hasn't logged in => redirect to login
+      this.router.navigateByUrl('/login');
+    }
     this.getUsers();
   }
 

@@ -1,6 +1,6 @@
 export class Task{
-    assignedTo:number;
-    createdBy:string;
+    assignedTo;
+    createdBy;
     deadline:Date;
     title:string;
 }

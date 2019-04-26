@@ -3,6 +3,9 @@ import { User } from '../user';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+
+const CREATE_URL='/create'
 
 @Component({
   selector: 'app-view-task',
@@ -14,40 +17,42 @@ export class ViewTaskComponent implements OnInit {
   tasks: Task[];
   users: User[];
   queryUser: string;
-  is404=false;
-  dt1;
+  is404 = false;
   constructor(private taskService: TaskService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router) { }
 
   getUsers() {
     this.userService.getUsers()
       .subscribe(data => {
         this.users = data["results"];
         console.log(this.users);
-        this.users.unshift(
-          {
-            id: null,
-            username: 'all',
-            email: null,
-            password:null,
-          }
-        );
       });
   }
 
-  getTasks(){
+  getTasks() {
     this.taskService.getTasks(this.queryUser)
-      .subscribe(data=> {
-        if(data){
-          this.tasks=data["results"];
+      .subscribe(data => {
+        if (data) {
+          this.tasks = data["results"];
+          for (var i = 0; i < this.tasks.length; i++) {
+            this.tasks[i].assignedTo = this.users.find(user => user.id === this.tasks[i].assignedTo).username;
+          }
+
           console.log(this.tasks);
+          if(this.tasks.length<1){
+            this.tasks=null;
+          }
         }
-        else{
-          this.is404=true;
+        else {
+          this.is404 = true;
         }
-      })
+      });
   }
 
+  goto(): void {
+    this.router.navigateByUrl(CREATE_URL);
+  }
 
 
   ngOnInit() {

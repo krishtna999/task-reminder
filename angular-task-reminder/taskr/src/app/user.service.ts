@@ -10,8 +10,11 @@ import { User } from './user';
 })
 export class UserService {
 
+  token = null;
+  username = null;
+
   private getTokenUrl = "http://localhost:8000/api-token-auth/";
-  private usersUrl= "http://localhost:8000/users/";
+  private usersUrl = "http://localhost:8000/users/";
 
   constructor(private http: HttpClient) { }
 
@@ -25,22 +28,22 @@ export class UserService {
     return this.http.post<String>(this.getTokenUrl, user, httpOptions)
       .pipe(
         catchError(this.handleError<String>(null))
-        );
+      );
   };
 
   getUsers(): Observable<Object> {
     return this.http.get<Object>(this.usersUrl);
   }
 
-  createUser(user:User): Observable<User>{
+  createUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user)
       .pipe(
         catchError(this.handleError<User>(null))
-        );
+      );
   }
 
-  handleError<T>(result: T){
-    return (error:any):Observable<T> => {
+  handleError<T>(result: T) {
+    return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
     }

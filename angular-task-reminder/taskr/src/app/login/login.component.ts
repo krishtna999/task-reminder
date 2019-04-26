@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
+const VIEW_URL = '/view';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
 
   user = new User();
   wrongCredentials = false;
   token = null;
 
-  getToken(): void {
+  GetToken(): void {
 
     this.userService.getToken(this.user)
       .subscribe(data => {
@@ -21,6 +25,9 @@ export class LoginComponent implements OnInit {
           this.token = data["token"];
           this.wrongCredentials = false;
           console.log(data, this.token);
+
+          // Go to create if true
+          this.router.navigateByUrl(VIEW_URL);
         } else {
           this.wrongCredentials = true;
         }
@@ -28,10 +35,16 @@ export class LoginComponent implements OnInit {
       });
 
   }
-  log(variable):void{
-    console.log(variable);
+
+
+  constructor(private userService: UserService,
+    private router: Router) { }
+
+  ngOnDestroy() {
+    this.userService.token = this.token;
+    this.userService.username = this.user.username;
   }
-  constructor(private userService: UserService) { }
+
   ngOnInit() {
   }
 

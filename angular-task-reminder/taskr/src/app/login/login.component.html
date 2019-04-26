@@ -1,14 +1,14 @@
-<div class="form-box">
+<form class="form-box" (ngSubmit)="GetToken()" >
     <div class="border border-light p-5">
 
         <p class="h4 mb-4 text-center">Sign in</p>
-    
+
         <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username"
-        [(ngModel)]="user.username">
-    
+            [(ngModel)]="user.username" name="username">
+
         <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"
-        [(ngModel)]="user.password">
-    
+            [(ngModel)]="user.password" name="password">
+
         <div class="d-flex justify-content-between">
             <div>
                 <div class="custom-control custom-checkbox">
@@ -20,19 +20,21 @@
                 <a href="">Forgot password?</a>
             </div>
         </div>
-    
-        <button class="btn btn-info btn-block my-4" type="submit" (click)="getToken()">Sign in</button>
-    
-        <div *ngIf="wrongCredentials"><p class="text-p" style="color:red" >Wrong Password !</p></div>
+
+        <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+        <div *ngIf="wrongCredentials">
+            <p class="text-p" style="color:red">Wrong Password !</p>
+        </div>
 
         <div class="text-center">
             <p>Not a member?
-                <a href="">Register</a>
+                <a href="/register">Register</a>
             </p>
         </div>
-        
-      </div>
-</div>
-<app-create-task [token]="token"></app-create-task>
+
+    </div>
+</form>
+<!-- <app-create-task [token]="token"></app-create-task>
 <app-view-task></app-view-task>
-<app-register></app-register>
+<app-register></app-register> -->

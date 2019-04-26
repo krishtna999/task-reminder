@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
+  <h1 style="display:inline">
+    Welcome to {{ title }}
   </h1>
+  <h1 *ngIf="userService.username" style="display:inline">, {{userService.username}} !</h1>
 </div>
-<app-login></app-login>
+<router-outlet></router-outlet>
