@@ -11,13 +11,15 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewTaskComponent } from './view-task/view-task.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CreateTaskComponent,
-    ViewTaskComponent
+    ViewTaskComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

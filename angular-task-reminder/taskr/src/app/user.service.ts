@@ -15,13 +15,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  handleError<T>(result: T){
-    return (error:any):Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    }
-  }
-
   getToken(user: User): Observable<String> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,6 +30,20 @@ export class UserService {
 
   getUsers(): Observable<Object> {
     return this.http.get<Object>(this.usersUrl);
+  }
+
+  createUser(user:User): Observable<User>{
+    return this.http.post<User>(this.usersUrl, user)
+      .pipe(
+        catchError(this.handleError<User>(null))
+        );
+  }
+
+  handleError<T>(result: T){
+    return (error:any):Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    }
   }
 
 }

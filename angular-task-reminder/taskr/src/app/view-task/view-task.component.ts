@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDetail } from '../user';
+import { User } from '../user';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
 import { UserService } from '../user.service';
@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 export class ViewTaskComponent implements OnInit {
 
   tasks: Task[];
-  users: UserDetail[];
+  users: User[];
   queryUser: string;
   is404=false;
   dt1;
@@ -26,8 +26,10 @@ export class ViewTaskComponent implements OnInit {
         console.log(this.users);
         this.users.unshift(
           {
-            id: 0,
-            username: 'all'
+            id: null,
+            username: 'all',
+            email: null,
+            password:null,
           }
         );
       });

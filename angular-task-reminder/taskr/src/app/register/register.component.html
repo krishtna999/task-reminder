@@ -1,0 +1,21 @@
+<div class="border border-light p-5">
+
+  <p class="h4 mb-4 text-center">Sign up</p>
+
+  <input type="text" id="defaultRegisterFormLastName" class="form-control mb-4" placeholder="Username"
+    [(ngModel)]="user.username">
+
+  <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"
+    [(ngModel)]="user.email">
+
+  <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+    aria-describedby="defaultRegisterFormPasswordHelpBlock" [(ngModel)]="user.password">
+
+  <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">Minimal 8 characters length</small>
+
+
+  <button class="btn btn-info my-4 btn-block" (click)="createUser()">Sign up</button>
+
+  <div *ngIf="alreadyExists"><p style="color: red">Username taken/ Already Registered</p></div>
+
+</div>
