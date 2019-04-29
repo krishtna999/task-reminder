@@ -1,0 +1,21 @@
+<div class="border border-light p-5" *ngIf="token">
+  <a class="btn btn-info btn-block my-4" href="{{VIEW_URL}}">View Tasks</a>
+  <p class="h4 mb-4 text-center">View Notifications</p>
+
+
+  <div *ngIf="isEmpty"><p style="color: red">No tasks assigned here</p></div>
+  <table class="table" *ngIf="!isEmpty && notifications">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Notification</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let notification of notifications">
+        <th scope="row">{{notification.title}}</th>
+        <td>{{notification.time_created | date: "dd/MM hh:mm a"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

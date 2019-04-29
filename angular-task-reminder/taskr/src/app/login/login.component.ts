@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   GetToken(): void {
 
-    this.userService.getToken(this.user)
+    this.userService.login(this.user)
       .subscribe(data => {
         if (data) {
           this.token = data["token"];
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnDestroy() {
-    this.userService.token = this.token;
+    localStorage.setItem("token",this.token);
     this.userService.username = this.user.username;
   }
 

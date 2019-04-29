@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewTaskComponent } from './view-task/view-task.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent,
     CreateTaskComponent,
     ViewTaskComponent,
-    RegisterComponent
+    RegisterComponent,
+    ViewNotificationsComponent
   ],
   imports: [
     BrowserModule,

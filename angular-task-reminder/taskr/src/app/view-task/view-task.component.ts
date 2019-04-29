@@ -6,7 +6,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification.service';
 
-const CREATE_URL = '/create'
+const CREATE_URL = '/create';
 
 @Component({
   selector: 'app-view-task',
@@ -50,16 +50,15 @@ export class ViewTaskComponent implements OnInit {
       });
   }
 
-  goto(): void {
-    this.router.navigateByUrl(CREATE_URL);
-  }
+
 
   ngOnInit() {
     this.getUsers();
     this.notificationService.getMsgObservable().subscribe(
       data =>{
+        console.log("Got :"+data);
         // This will be triggered on new messages to the websocket 
-        if(data==this.queryUser){
+        if(data==this.queryUser || this.queryUser==":all"){
           this.getTasks();
         }
       }

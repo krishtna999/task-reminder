@@ -1,5 +1,7 @@
 <div class="border border-light p-5">
-  <button class="btn btn-info btn-block my-4" (click)="goto()">Create Task</button>
+  <a class="btn btn-info btn-block my-4" href="create/">Create Task</a>
+  <a class="btn btn-info btn-block my-4" href="notifications/">View Notifications</a>
+
   <p class="h4 mb-4 text-center">View Tasks</p>
 
   <select [(ngModel)]="queryUser" (ngModelChange)="getTasks()" class="browser-default custom-select mb-4" id="select"
@@ -25,7 +27,7 @@
       <tr *ngFor="let task of tasks">
         <th scope="row">{{task.title}}</th>
         <td>{{task.createdBy}}</td>
-        <td>{{task.assignedTo}}</td>
+        <td>{{task.assignedToName}}</td>
         <td>{{task.deadline | date: "dd/MM/yy hh:mm a"}}</td>
       </tr>
     </tbody>

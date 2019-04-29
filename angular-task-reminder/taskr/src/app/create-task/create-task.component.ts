@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
-import { User } from '../user';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-task.component.css']
 })
 export class CreateTaskComponent implements OnInit {
+  VIEW_TASKS_URL='view/';
+  VIEW_NOTIFICATIONS_URL='notifications/';
+
   @Input() token: string;
 
   // Using create status to indicate 401 not authorized errors 
@@ -19,8 +21,8 @@ export class CreateTaskComponent implements OnInit {
   users;
   dt1;
   constructor(private taskService: TaskService,
-              private userService: UserService,
-              private router:Router) { }
+    private userService: UserService,
+    private router: Router) { }
 
   createTask() {
     this.taskService.createTask(this.task, this.token)
@@ -28,12 +30,14 @@ export class CreateTaskComponent implements OnInit {
         if (!data) {
           this.createFailed = true;
         }
+        else {
+          this.createFailed = false;
+          this.router.navigateByUrl(this.VIEW_TASKS_URL);
+        }
       });
   }
 
-  // bleh(){
-  //   console.log(this.task.deadline+this.task.title+this.task.assignedTo);
-  // }
+
   getUsers() {
     this.userService.getUsers()
       .subscribe(data => {
@@ -45,11 +49,10 @@ export class CreateTaskComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.userService.token) {
-      this.token = this.userService.token;
-    } else {
+    this.token = localStorage.getItem("token");
+    if (!this.token) {
       // User hasn't logged in => redirect to login
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/');
     }
     this.getUsers();
   }

@@ -28,7 +28,7 @@ export class TaskService {
   }
 
   createTask(task:Task,token:string):Observable<Task> {
-    console.log('token:'+token);
+  
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

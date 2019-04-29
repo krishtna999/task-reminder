@@ -18,7 +18,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getToken(user: User): Observable<String> {
+  login(user: User): Observable<String> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -29,6 +29,8 @@ export class UserService {
       .pipe(
         catchError(this.handleError<String>(null))
       );
+
+
   };
 
   getUsers(): Observable<Object> {
@@ -48,7 +50,6 @@ export class UserService {
       return of(result as T);
     }
   }
-
 }
 
 

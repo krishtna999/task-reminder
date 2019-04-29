@@ -1,4 +1,6 @@
 <div *ngIf="token" class="border border-light p-5">
+    <a class="btn btn-info btn-block my-4" href="{{VIEW_NOTIFICATIONS_URL}}">View Notifications</a>
+    <a class="btn btn-info btn-block my-4" href="{{VIEW_TASKS_URL}}">View All Tasks</a>
     <p class="h4 mb-4 text-center">Create Task</p>
 
     <select [(ngModel)]="task.assignedTo" class="browser-default custom-select mb-4" id="select">
@@ -15,6 +17,8 @@
 
     <button class="btn btn-info btn-block my-4" (click)="createTask()">Create !</button>
 
-    <div *ngIf="createFailed"><p style="color:red">401 Token Authentication Error</p></div>
+    <div *ngIf="createFailed">
+        <p style="color:red">401 Token Authentication Error</p>
+    </div>
 
 </div>
