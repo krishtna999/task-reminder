@@ -4,7 +4,8 @@
 
   <select [(ngModel)]="queryUser" (ngModelChange)="getTasks()" class="browser-default custom-select mb-4" id="select"
     def>
-    <option value="all" selected="selected">all</option>
+    <!-- The value field inthe below option is very important as it decides the URL to get ALL tasks! -->
+    <option value=":all" selected="selected">all</option>
     <option value="{{user.username}}" *ngFor="let user of users">{{user.username}}</option>
   </select>
   <div *ngIf="is404">

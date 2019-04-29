@@ -39,10 +39,6 @@ export class ViewTaskComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           this.tasks = data["results"];
-          for (var i = 0; i < this.tasks.length; i++) {
-            this.tasks[i].assignedTo = this.users.find(user => user.id === this.tasks[i].assignedTo).username;
-          }
-
           console.log(this.tasks);
           if (this.tasks.length < 1) {
             this.tasks = null;
@@ -64,7 +60,7 @@ export class ViewTaskComponent implements OnInit {
       data =>{
         // This will be triggered on new messages to the websocket 
         if(data==this.queryUser){
-          this.getTasks()
+          this.getTasks();
         }
       }
     )
