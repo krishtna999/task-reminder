@@ -4,8 +4,9 @@ import { Task } from '../task';
 import { TaskService } from '../task.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../notification.service';
 
-const CREATE_URL='/create'
+const CREATE_URL = '/create'
 
 @Component({
   selector: 'app-view-task',
@@ -18,9 +19,12 @@ export class ViewTaskComponent implements OnInit {
   users: User[];
   queryUser: string;
   is404 = false;
+  ws:WebSocket;
   constructor(private taskService: TaskService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   getUsers() {
     this.userService.getUsers()
@@ -40,8 +44,8 @@ export class ViewTaskComponent implements OnInit {
           }
 
           console.log(this.tasks);
-          if(this.tasks.length<1){
-            this.tasks=null;
+          if (this.tasks.length < 1) {
+            this.tasks = null;
           }
         }
         else {
@@ -54,9 +58,16 @@ export class ViewTaskComponent implements OnInit {
     this.router.navigateByUrl(CREATE_URL);
   }
 
-
   ngOnInit() {
     this.getUsers();
+    this.notificationService.getMsgObservable().subscribe(
+      data =>{
+        // This will be triggered on new messages to the websocket 
+        if(data==this.queryUser){
+          this.getTasks()
+        }
+      }
+    )
   }
 
 }
