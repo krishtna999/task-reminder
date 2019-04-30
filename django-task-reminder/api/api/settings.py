@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'taskr.apps.TaskrConfig',
     'rest_framework.authtoken',
     'corsheaders',
+    'ws4redis',
+    'django_celery_results',
 ]
 
 REST_FRAMEWORK = {
@@ -48,7 +50,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',  # <-- And here
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 25
 }
 
 MIDDLEWARE = [
@@ -129,7 +131,23 @@ USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL=True
 
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_CACHE_BACKEND = 'django-cache'
+
+CELERY_TASK_SERIALIZER = 'json'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+WEBSOCKET_URL='/ws/'
+
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+SESSION_ENGINE = 'redis_sessions.session'
+
+WS4REDIS_EXPIRE = 100
+
+SESSION_REDIS_PREFIX = 'session'
+

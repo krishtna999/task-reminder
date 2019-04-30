@@ -8,7 +8,7 @@
     def>
     <!-- The value field inthe below option is very important as it decides the URL to get ALL tasks! -->
     <option value=":all" selected="selected">all</option>
-    <option value="{{user.username}}" *ngFor="let user of users">{{user.username}}</option>
+    <option value="{{user.username}}" *ngFor="let user of users; trackBy:">{{user.username}}</option>
   </select>
   <div *ngIf="is404">
     <p style="color: red">404, User not found :( I mean, who even asked you to edit the fields</p>

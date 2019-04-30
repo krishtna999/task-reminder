@@ -12,5 +12,8 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
+from django.conf import settings
+from django.core.wsgi import get_wsgi_application
+from ws4redis.uwsgi_runserver import uWSGIWebsocketServer
 
 application = get_wsgi_application()

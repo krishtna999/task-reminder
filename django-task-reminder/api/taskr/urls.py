@@ -12,6 +12,9 @@ user_list = UserViewSet.as_view({
     'post': 'create'
 })
 
+notification_list = NotificationViewSet.as_view({
+    'post': 'list'
+})
 
 urlpatterns = [
     path('tasks/<str:username>', task_list, name="Tasks-CR"),
@@ -20,5 +23,6 @@ urlpatterns = [
     path('users/', user_list, name="Users-CR"),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token,
-         name='api-token-auth'),  
+         name='api-token-auth'),
+    path('notifications/', notification_list, name='get-notifications')
 ]

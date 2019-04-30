@@ -12,3 +12,10 @@ class Task(models.Model):
     assignedTo = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="Assigned_To")
     deadline = models.DateTimeField(default=datetime.now()+timedelta(days=7))
+
+
+class Notification(models.Model):
+    time_created = models.DateTimeField()
+    assignedTo = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=300)

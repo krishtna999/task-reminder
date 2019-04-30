@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { isError } from 'util';
 
 @Component({
   selector: 'app-register',
@@ -10,19 +9,21 @@ import { isError } from 'util';
 })
 export class RegisterComponent implements OnInit {
 
-  user=new User();
-  constructor(private userService:UserService) { }
-  alreadyExists=false;
+  user = new User();
+  alreadyExists = false;
 
-  createUser(){
+  constructor(private userService: UserService) { }
+
+
+  createUser() {
     this.userService.createUser(this.user).
       subscribe(
-        data=>{
-          if(!data){
-            this.alreadyExists=true;  
+        data => {
+          if (!data) {
+            this.alreadyExists = true;
           }
         }
-      )
+      );
   }
   ngOnInit() {
   }

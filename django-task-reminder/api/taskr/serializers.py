@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from .models import Task
+from .models import *
 from django.contrib.auth.models import User
 
 
@@ -26,7 +26,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        fields = ('id', 'username', 'email','password')
+        fields = ('id', 'username', 'email', 'password')
+
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,7 +39,16 @@ class UserListSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
 
     createdBy = serializers.ReadOnlyField(source='createdBy.username')
+    assignedToName = serializers.ReadOnlyField(source='assignedTo.username')
 
     class Meta:
         model = Task
-        fields = ('title', 'createdBy', 'assignedTo', 'deadline')
+        fields = ('id', 'title', 'createdBy',
+                  'assignedToName', 'assignedTo', 'deadline')
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Notification
+        fields = ('time_created', 'title', 'assignedTo')

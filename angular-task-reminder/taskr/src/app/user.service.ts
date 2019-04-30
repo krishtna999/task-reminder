@@ -1,55 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { User } from './user';
+import { SyncService } from './sync.service';
 
+const LOGIN_URL = "http://localhost:8000/api-token-auth/";
+const USERS_URL = "http://localhost:8000/users/";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  token = null;
-  username = null;
+  constructor(private syncService: SyncService, ) { }
 
-  private getTokenUrl = "http://localhost:8000/api-token-auth/";
-  private usersUrl = "http://localhost:8000/users/";
-
-  constructor(private http: HttpClient) { }
-
-  login(user: User): Observable<String> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    return this.http.post<String>(this.getTokenUrl, user, httpOptions)
-      .pipe(
-        catchError(this.handleError<String>(null))
-      );
-
-
+  login(user: User): Observable<Object> {
+    return this.syncService.post(LOGIN_URL, user, null)
   };
 
   getUsers(): Observable<Object> {
-    return this.http.get<Object>(this.usersUrl);
+    return this.syncService.get(USERS_URL);
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user)
-      .pipe(
-        catchError(this.handleError<User>(null))
-      );
+    return this.syncService.post(USERS_URL, user, null);
   }
 
-  handleError<T>(result: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    }
-  }
 }
 
 

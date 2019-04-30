@@ -5,6 +5,7 @@ import { TaskService } from '../task.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification.service';
+import { SyncService } from '../sync.service';
 
 const CREATE_URL = '/create';
 
@@ -19,18 +20,20 @@ export class ViewTaskComponent implements OnInit {
   users: User[];
   queryUser: string;
   is404 = false;
-  ws:WebSocket;
-  constructor(private taskService: TaskService,
+
+  constructor(
+    private taskService: TaskService,
     private userService: UserService,
     private router: Router,
-    private notificationService: NotificationService
+    private syncService: SyncService,
   ) { }
+
 
   getUsers() {
     this.userService.getUsers()
       .subscribe(data => {
-        this.users = data["results"];
-        console.log(this.users);
+        this.users = data['results'];
+        // console.log(this.users);
       });
   }
 
@@ -38,31 +41,35 @@ export class ViewTaskComponent implements OnInit {
     this.taskService.getTasks(this.queryUser)
       .subscribe(data => {
         if (data) {
-          this.tasks = data["results"];
-          console.log(this.tasks);
+          this.tasks = data['results'];
+          // console.log(this.tasks);
           if (this.tasks.length < 1) {
             this.tasks = null;
           }
-        }
-        else {
+        } else {
           this.is404 = true;
         }
       });
   }
 
-
+  trackBy(user:User){
+    if(user){
+      return user.id;
+    }
+  }
 
   ngOnInit() {
     this.getUsers();
-    this.notificationService.getMsgObservable().subscribe(
-      data =>{
-        console.log("Got :"+data);
-        // This will be triggered on new messages to the websocket 
-        if(data==this.queryUser || this.queryUser==":all"){
+
+    this.syncService.getMsgObservable().subscribe(
+      data => {
+        console.log('Got :' + data);
+        // This will be triggered on new messages to the websocket
+        if (data == this.queryUser || this.queryUser == ':all') {
           this.getTasks();
         }
       }
-    )
+    );
   }
 
 }

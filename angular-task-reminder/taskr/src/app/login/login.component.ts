@@ -15,10 +15,13 @@ export class LoginComponent implements OnInit {
 
   user = new User();
   wrongCredentials = false;
-  token = null;
+  private token = null;
+
+  constructor(
+    private userService: UserService,
+    private router: Router) { }
 
   GetToken(): void {
-
     this.userService.login(this.user)
       .subscribe(data => {
         if (data) {
@@ -33,16 +36,10 @@ export class LoginComponent implements OnInit {
         }
 
       });
-
   }
 
-
-  constructor(private userService: UserService,
-    private router: Router) { }
-
   ngOnDestroy() {
-    localStorage.setItem("token",this.token);
-    this.userService.username = this.user.username;
+    localStorage.setItem("token", this.token);
   }
 
   ngOnInit() {

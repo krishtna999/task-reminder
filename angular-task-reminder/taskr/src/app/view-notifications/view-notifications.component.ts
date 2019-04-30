@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../notification.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { SyncService } from '../sync.service';
 
 @Component({
   selector: 'app-view-notifications',
@@ -9,16 +10,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-notifications.component.css']
 })
 export class ViewNotificationsComponent implements OnInit {
-  VIEW_URL='view/';
-
-
-  token:string;
+  VIEW_URL = 'view/';
+  private token: string;
   notifications: Notification[];
   isEmpty = false;
-  constructor(private notificationService: NotificationService,
-    private userService: UserService,
+  private getFromStorage() {
+    this.token = localStorage.getItem("token");
+    if (!this.token) {
+      // User hasn't logged in => redirect to login
+      this.router.navigateByUrl('/');
+    }
+  }
+
+  constructor(
+    private notificationService: NotificationService,
+    private syncService: SyncService,
     private router: Router) { }
 
+  
 
   getNotifs(): void {
     if (this.token) {
@@ -31,24 +40,21 @@ export class ViewNotificationsComponent implements OnInit {
               this.isEmpty = true;
             }
           } else {
-            console.log("ERROR !")
+            console.log('Error in recieving notifications');
           }
         }
-      )
+      );
     }
   }
 
+
   ngOnInit() {
-    this.token = localStorage.getItem("token");
-    if (!this.token) {
-      // User hasn't logged in => redirect to login
-      this.router.navigateByUrl('/login');
-    }
+    this.getFromStorage();
     this.getNotifs();
-    this.notificationService.getMsgObservable().subscribe(
+    this.syncService.getMsgObservable().subscribe(
       data => {
-        // This will be triggered on new messages to the websocket 
-        if (data == ":notification") {
+        // This will be triggered on new messages to the websocket
+        if (data == ':notification') {
           this.getNotifs();
         }
       }
