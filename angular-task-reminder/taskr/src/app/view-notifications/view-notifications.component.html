@@ -3,7 +3,7 @@
   <!-- <a class="btn btn-info btn-block my-4" href="{{VIEW_URL}}">View Tasks</a> -->
   <p class="h4 mb-4 text-center">{{username}}'s Notifications</p>
 
-
+  <ng-flash-message></ng-flash-message>
   <div *ngIf="isEmpty"><p style="color: red">No notifications for you :)</p></div>
   <table class="table" *ngIf="!isEmpty && notifications">
     <thead class="thead-dark">

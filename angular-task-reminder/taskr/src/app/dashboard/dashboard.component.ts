@@ -28,18 +28,9 @@ export class DashboardComponent implements OnInit {
     private taskService:TaskService,
     private router:Router) { }
 
-  getMyTasks(){
-    this.taskService.getCurrentUserTask(this.token)
-      .subscribe(
-        data =>{
-          this.myTasks=data['results'];
-        }
-      )
-  }
 
   ngOnInit() {
     this.getFromStorage();
-    this.getMyTasks();
   }
 
 }

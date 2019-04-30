@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.component';
+import { NgFlashMessagesModule } from 'ng-flash-messages';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.c
     RegisterComponent,
     ViewNotificationsComponent,
     DashboardComponent,
-    ViewTaskByUserComponent
+    ViewTaskByUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +37,7 @@ import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.c
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgFlashMessagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
