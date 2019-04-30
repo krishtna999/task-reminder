@@ -2,3 +2,4 @@
 angular-task-reminder/bkp-taskr/
 angular-task-reminder/taskr/node_modules/
 django-task-reminder/venv/
+.venv/
