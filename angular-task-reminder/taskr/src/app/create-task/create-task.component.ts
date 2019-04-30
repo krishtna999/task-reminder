@@ -43,7 +43,6 @@ export class CreateTaskComponent implements OnInit {
           this.createFailed = true;
         } else {
           this.createFailed = false;
-          this.router.navigateByUrl(this.VIEW_TASKS_URL);
         }
       });
   }

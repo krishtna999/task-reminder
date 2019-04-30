@@ -3,45 +3,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Task } from './task';
+import { SyncService } from './sync.service';
+
+const GET_TASK_URL = 'http://localhost:8000/tasks/';
+const CREATE_TASK_URL = 'http://localhost:8000/tasks/create';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private getTasksUrl = 'http://localhost:8000/tasks/';
-  private createTaskUrl = 'http://localhost:8000/tasks/create';
-  
-  constructor(private http: HttpClient) { }
+  constructor(private syncService: SyncService) { }
 
-  handleError<T>(result: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    }
-  }
 
   getTasks(user: string): Observable<Task[]> {
-    return this.http.get<Task[]>(this.getTasksUrl + user)
-      .pipe(
-        catchError(this.handleError<Task[]>(null))
-      );
+    return this.syncService.get<Task[]>(GET_TASK_URL + user);
   }
 
   createTask(task: Task, token: string): Observable<Task> {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Token ' + token
-      })
-    };
-
-    return this.http.post<Task>(this.createTaskUrl, task, httpOptions)
-      .pipe(
-        catchError(this.handleError<Task>(null))
-      );
-
+    return this.syncService.post<Task>(CREATE_TASK_URL, task, token);
   }
 
 }
