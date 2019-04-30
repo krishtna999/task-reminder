@@ -17,11 +17,15 @@ export class TaskService {
 
 
   getTasks(user: string): Observable<Task[]> {
-    return this.syncService.get<Task[]>(GET_TASK_URL + user);
+    return this.syncService.get<Task[]>(GET_TASK_URL + user,null);
   }
 
   createTask(task: Task, token: string): Observable<Task> {
     return this.syncService.post<Task>(CREATE_TASK_URL, task, token);
+  }
+
+  getCurrentUserTask(token: string): Observable<Task> {
+    return this.syncService.get<Task>(GET_TASK_URL,token);
   }
 
 }

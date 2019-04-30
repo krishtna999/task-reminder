@@ -1,0 +1,11 @@
+<div class="border border-light p-5" *ngIf="token && username">
+  <a class="btn btn-info btn-block my-4" href="{{CREATE_URL}}">Create Task</a>
+  <a class="btn btn-info btn-block my-4" href="{{VIEW_TASK_BY_USER_URL}}">View Tasks by User</a>
+
+  <!-- <a class="btn btn-info btn-block my-4" href="notifications/">View Notifications</a> -->
+
+  <p class="h2 mb-4 text-center">Dashboard</p>
+  <app-view-task [queryUser]=username></app-view-task>
+</div>
+
+<app-view-notifications></app-view-notifications>

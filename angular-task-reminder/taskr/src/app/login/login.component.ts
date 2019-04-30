@@ -3,7 +3,7 @@ import { UserService } from '../user.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 
-const VIEW_URL = '/view';
+const DASHBOARD_URL = '/dashboard';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
           console.log(data, this.token);
 
           // Go to create if true
-          this.router.navigateByUrl(VIEW_URL);
+          this.router.navigateByUrl(DASHBOARD_URL);
         } else {
           this.wrongCredentials = true;
         }
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
 
   ngOnDestroy() {
     localStorage.setItem("token", this.token);
+    localStorage.setItem("username",this.user.username);
   }
 
   ngOnInit() {

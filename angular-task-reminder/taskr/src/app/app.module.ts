@@ -14,6 +14,8 @@ import { ViewTaskComponent } from './view-task/view-task.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ViewNotificationsComponent } from './view-notifications/view-notificati
     CreateTaskComponent,
     ViewTaskComponent,
     RegisterComponent,
-    ViewNotificationsComponent
+    ViewNotificationsComponent,
+    DashboardComponent,
+    ViewTaskByUserComponent
   ],
   imports: [
     BrowserModule,

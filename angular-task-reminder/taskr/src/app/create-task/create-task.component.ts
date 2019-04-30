@@ -11,8 +11,7 @@ import { User } from '../user';
   styleUrls: ['./create-task.component.css']
 })
 export class CreateTaskComponent implements OnInit {
-  VIEW_TASKS_URL = 'view/';
-  VIEW_NOTIFICATIONS_URL = 'notifications/';
+  DASHBOARD_URL = 'dashboard/';
 
   @Input() token: string;
 

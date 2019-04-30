@@ -14,12 +14,14 @@ export class ViewNotificationsComponent implements OnInit {
   private token: string;
   notifications: Notification[];
   isEmpty = false;
+  username:string;
   private getFromStorage() {
-    this.token = localStorage.getItem("token");
+    this.token = localStorage.getItem('token');
     if (!this.token) {
       // User hasn't logged in => redirect to login
       this.router.navigateByUrl('/');
     }
+    this.username=localStorage.getItem('username');
   }
 
   constructor(
@@ -36,7 +38,7 @@ export class ViewNotificationsComponent implements OnInit {
           if (data) {
             this.notifications = data['results'].slice().reverse();
             // console.log(this.notifications);
-            if (this.notifications.length < 0) {
+            if (this.notifications.length <= 0) {
               this.isEmpty = true;
             }
           } else {

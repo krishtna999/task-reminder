@@ -20,7 +20,7 @@ export class UserService {
   };
 
   getUsers(): Observable<Object> {
-    return this.syncService.get(USERS_URL);
+    return this.syncService.get(USERS_URL,null);
   }
 
   createUser(user: User): Observable<User> {

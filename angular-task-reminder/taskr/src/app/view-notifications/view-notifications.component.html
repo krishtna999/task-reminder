@@ -1,9 +1,10 @@
+<div class="border border-light p-5">
 <div class="border border-light p-5" *ngIf="token">
-  <a class="btn btn-info btn-block my-4" href="{{VIEW_URL}}">View Tasks</a>
-  <p class="h4 mb-4 text-center">View Notifications</p>
+  <!-- <a class="btn btn-info btn-block my-4" href="{{VIEW_URL}}">View Tasks</a> -->
+  <p class="h4 mb-4 text-center">{{username}}'s Notifications</p>
 
 
-  <div *ngIf="isEmpty"><p style="color: red">No tasks assigned here</p></div>
+  <div *ngIf="isEmpty"><p style="color: red">No notifications for you :)</p></div>
   <table class="table" *ngIf="!isEmpty && notifications">
     <thead class="thead-dark">
       <tr>
@@ -18,4 +19,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

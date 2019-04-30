@@ -45,8 +45,8 @@ export class SyncService {
       );
   }
 
-  get<T>(url): Observable<T> {
-    return this.http.get<T>(url)
+  get<T>(url,token): Observable<T> {
+    return this.http.get<T>(url,this.getHttpOptions(token))
       .pipe(
         catchError(this.handleError<T>(null))
       );

@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { NotificationService } from '../notification.service';
 import { SyncService } from '../sync.service';
 
-const CREATE_URL = '/create';
 
 @Component({
   selector: 'app-view-task',
@@ -15,12 +12,17 @@ const CREATE_URL = '/create';
   styleUrls: ['./view-task.component.css']
 })
 export class ViewTaskComponent implements OnInit {
+  CREATE_URL = '/create';
+  VIEW_NOTIFICATIONS_URL = 'notifications/';
 
   tasks: Task[];
-  users: User[];
   queryUser: string;
   is404 = false;
-
+  @Input('queryUser')
+  set name(name: string) {
+    this.queryUser = name;
+    this.getTasks();
+  }
   constructor(
     private taskService: TaskService,
     private userService: UserService,
@@ -29,38 +31,25 @@ export class ViewTaskComponent implements OnInit {
   ) { }
 
 
-  getUsers() {
-    this.userService.getUsers()
-      .subscribe(data => {
-        this.users = data['results'];
-        // console.log(this.users);
-      });
-  }
+
 
   getTasks() {
     this.taskService.getTasks(this.queryUser)
       .subscribe(data => {
         if (data) {
           this.tasks = data['results'].slice().reverse();
-          // console.log(this.tasks);
           if (this.tasks.length < 1) {
             this.tasks = null;
           }
-        } else {
+          this.is404 = false;
+        }
+        else {
           this.is404 = true;
         }
       });
   }
 
-  trackBy(user:User){
-    if(user){
-      return user.id;
-    }
-  }
-
   ngOnInit() {
-    this.getUsers();
-
     this.syncService.getMsgObservable().subscribe(
       data => {
         console.log('Got :' + data);

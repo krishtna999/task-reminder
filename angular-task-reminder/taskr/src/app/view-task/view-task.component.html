@@ -1,19 +1,11 @@
-<div class="border border-light p-5">
-  <a class="btn btn-info btn-block my-4" href="create/">Create Task</a>
-  <a class="btn btn-info btn-block my-4" href="notifications/">View Notifications</a>
-
-  <p class="h4 mb-4 text-center">View Tasks</p>
-
-  <select [(ngModel)]="queryUser" (ngModelChange)="getTasks()" class="browser-default custom-select mb-4" id="select"
-    def>
-    <!-- The value field inthe below option is very important as it decides the URL to get ALL tasks! -->
-    <option value=":all" selected="selected">all</option>
-    <option value="{{user.username}}" *ngFor="let user of users; trackBy:">{{user.username}}</option>
-  </select>
+<div class="border border-light p-5" *ngIf="queryUser">
+  <p class="h4 mb-4 text-center">{{queryUser}}'s Tasks</p>
   <div *ngIf="is404">
-    <p style="color: red">404, User not found :( I mean, who even asked you to edit the fields</p>
+    <p style="color: red">404, User not found :(</p>
   </div>
-  <div *ngIf="!tasks"><p style="color: red">No tasks assigned here</p></div>
+  <div *ngIf="!tasks">
+    <p style="color: red">No tasks assigned here</p>
+  </div>
   <table class="table" *ngIf="queryUser && tasks">
     <thead class="thead-dark">
       <tr>
