@@ -34,8 +34,8 @@ export class ViewNotificationsComponent implements OnInit {
       this.notificationService.getNotifications(this.token).subscribe(
         data => {
           if (data) {
-            this.notifications = data['results'];
-            console.log(this.notifications);
+            this.notifications = data['results'].slice().reverse();
+            // console.log(this.notifications);
             if (this.notifications.length < 0) {
               this.isEmpty = true;
             }

@@ -41,7 +41,7 @@ export class ViewTaskComponent implements OnInit {
     this.taskService.getTasks(this.queryUser)
       .subscribe(data => {
         if (data) {
-          this.tasks = data['results'];
+          this.tasks = data['results'].slice().reverse();
           // console.log(this.tasks);
           if (this.tasks.length < 1) {
             this.tasks = null;
