@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../notification.service';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { SyncService } from '../sync.service';
-import { NgFlashMessageService } from 'ng-flash-messages';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-view-notifications',
@@ -31,7 +30,8 @@ export class ViewNotificationsComponent implements OnInit {
     private notificationService: NotificationService,
     private syncService: SyncService,
     private router: Router,
-    private ngFlashMessageService: NgFlashMessageService, ) { }
+    private snotifyService: SnotifyService,
+  ) { }
 
 
   getNotifs(shouldFlash): void {
@@ -45,7 +45,7 @@ export class ViewNotificationsComponent implements OnInit {
               this.isEmpty = true;
             }
             if (shouldFlash) {
-              this.flashMessage('Deadline for "' + this.notifications[0].title + '" has passed ! ');
+              this.snotifyService.warning('Deadline Reached', this.notifications[0].title, {timeout: 60000});
             }
           } else {
             console.log('Error in recieving notifications');
@@ -55,19 +55,7 @@ export class ViewNotificationsComponent implements OnInit {
     }
   }
 
-  flashMessage(message: string) {
-    this.flashNotifications.push(message);
-    this.ngFlashMessageService.showFlashMessage({
-      // Array of messages each will be displayed in new line
-      messages: this.flashNotifications,
-      // Whether the flash can be dismissed by the user defaults to false
-      dismissible: true,
-      // Time after which the flash disappears defaults to 2000ms
-      timeout: false,
-      // Type of flash message, it defaults to info and success, warning, danger types can also be used
-      type: 'info'
-    });
-  }
+
 
   ngOnInit() {
     this.flashNotifications = new Array();

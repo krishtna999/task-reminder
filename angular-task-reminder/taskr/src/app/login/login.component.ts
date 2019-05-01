@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user)
       .subscribe(data => {
         if (data) {
-          this.token = data["token"];
+          this.token = data['token'];
           this.wrongCredentials = false;
           console.log(data, this.token);
 

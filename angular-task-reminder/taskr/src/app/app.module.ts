@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.component';
-import { NgFlashMessagesModule } from 'ng-flash-messages';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,12 @@ import { NgFlashMessagesModule } from 'ng-flash-messages';
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    NgFlashMessagesModule,
+    SnotifyModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
