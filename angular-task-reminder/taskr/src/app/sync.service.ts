@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
-
+const BASE_URL = 'http://localhost:8000/'
 @Injectable({
   providedIn: 'root'
 })
@@ -27,11 +27,6 @@ export class SyncService {
         })
       };
     }
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
   }
 
   constructor(private http: HttpClient) {
@@ -39,14 +34,14 @@ export class SyncService {
   }
 
   post<T>(url, vars, token): Observable<T> {
-    return this.http.post<T>(url, vars, this.getHttpOptions(token))
+    return this.http.post<T>(BASE_URL + url, vars, this.getHttpOptions(token))
       .pipe(
         catchError(this.handleError<T>(null))
       );
   }
 
-  get<T>(url,token): Observable<T> {
-    return this.http.get<T>(url,this.getHttpOptions(token))
+  get<T>(url, parameters): Observable<T> {
+    return this.http.get<T>(BASE_URL + url, { params: parameters })
       .pipe(
         catchError(this.handleError<T>(null))
       );
@@ -64,11 +59,11 @@ export class SyncService {
       console.log('websocket connected');
     };
 
-    this.ws.onerror = e =>  {
+    this.ws.onerror = e => {
       console.error('Socket encountered error: ', e, 'Closing socket');
       this.ws.close();
     };
-    this.ws.onclose = e =>  {
+    this.ws.onclose = e => {
       console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
       setTimeout(function () {
         this.initWebSocket();

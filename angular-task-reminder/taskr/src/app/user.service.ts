@@ -5,8 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { User } from './user';
 import { SyncService } from './sync.service';
 
-const LOGIN_URL = 'http://localhost:8000/api-token-auth/';
-const USERS_URL = 'http://localhost:8000/users/';
+const LOGIN_URL = 'api-token-auth/';
+const USERS_URL = 'users';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class UserService {
   };
 
   getUsers(): Observable<Object> {
-    return this.syncService.get(USERS_URL,null);
+    return this.syncService.get(USERS_URL, null);
   }
 
   createUser(user: User): Observable<User> {

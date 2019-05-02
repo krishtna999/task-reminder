@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SyncService } from './sync.service';
 
-const NOTIFICATIONS_URL = 'http://localhost:8000/notifications/';
+const NOTIFICATIONS_URL = 'notifications';
 
 @Injectable({
   providedIn: 'root'
