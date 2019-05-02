@@ -16,15 +16,13 @@ app = Celery('tasks', broker='redis://localhost//')
 
 
 
-
+'''
+:notification = notification for any user 
+'''
 NOTIFICATION_MSG=":notification"
 
 @app.task
 def new_task(user:str):
-    '''
-    :all = for reloading all list
-    :notification = notification for any user 
-    '''
     redis_publisher=RedisPublisher(facility='foobar',broadcast=True)
     message= RedisMessage(user)
     redis_publisher.publish_message(message)

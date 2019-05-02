@@ -17,12 +17,11 @@ notification_list = NotificationViewSet.as_view({
 })
 
 urlpatterns = [
-    path('tasks/<str:username>', task_list, name="Tasks-CR"),
+    path('tasks', task_list, name="Tasks-LoggedIn-User"),
     # Post only :
-    path('addTask/', task_list, name="Tasks-CR"),
-    path('users/', user_list, name="Users-CR"),
+    path('users', user_list, name="Users-CR"),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token,
          name='api-token-auth'),
-    path('notifications/', notification_list, name='get-notifications')
+    path('notifications', notification_list, name='get-notifications')
 ]

@@ -43,14 +43,16 @@ INSTALLED_APPS = [
     'corsheaders',
     'ws4redis',
     'django_celery_results',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 25
+    'PAGE_SIZE': 25,
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 MIDDLEWARE = [
@@ -129,7 +131,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 CELERY_RESULT_BACKEND = 'django-db'
 
@@ -141,7 +143,7 @@ CELERY_TASK_SERIALIZER = 'json'
 
 STATIC_URL = '/static/'
 
-WEBSOCKET_URL='/ws/'
+WEBSOCKET_URL = '/ws/'
 
 WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
@@ -150,4 +152,3 @@ SESSION_ENGINE = 'redis_sessions.session'
 WS4REDIS_EXPIRE = 100
 
 SESSION_REDIS_PREFIX = 'session'
-
