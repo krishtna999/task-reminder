@@ -3,11 +3,7 @@
 
   <p class="h4 mb-4 text-center">View Tasks</p>
 
-  <select [(ngModel)]="queryUser" class="browser-default custom-select mb-4" id="select" def>
-    <!-- The value field inthe below option is very important as it decides the URL to get ALL tasks! -->
-    <option value=":all" selected="selected">all</option>
-    <option value="{{user.username}}" *ngFor="let user of users; trackBy:">{{user.username}}</option>
-  </select>
+  <app-user-dropdown (userSelect)='queryUser=$event'></app-user-dropdown>
 
   <app-view-task [queryUser]="queryUser"></app-view-task>
 </div>

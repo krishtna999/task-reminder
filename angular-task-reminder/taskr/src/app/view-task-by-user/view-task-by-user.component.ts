@@ -8,19 +8,14 @@ import { User } from '../user';
   styleUrls: ['./view-task-by-user.component.css']
 })
 export class ViewTaskByUserComponent implements OnInit {
-  DASHBOARD_URL='dashboard/'
+  DASHBOARD_URL = 'dashboard/';
   users: User[];
-  private getUsers() {
-    this.userService.getUsers()
-      .subscribe(data => {
-        this.users = data['results'];
-      });
+
+  constructor() { }
+  disp(ok){
+    console.log(ok);
   }
-  constructor(private userService:UserService) { }
-
   ngOnInit() {
-    this.getUsers();
-
   }
 
 }

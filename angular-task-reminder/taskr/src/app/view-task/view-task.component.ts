@@ -21,6 +21,7 @@ export class ViewTaskComponent implements OnInit {
   set name(name: string) {
     this.queryUser = name;
     this.getTasks(false);
+    // console.log(this.queryUser);
   }
   constructor(
     private taskService: TaskService,

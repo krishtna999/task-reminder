@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('/');
     }
     this.username=localStorage.getItem('username');
+    console.log(this.username)
   }
 
   constructor(

@@ -17,6 +17,7 @@ import { ViewNotificationsComponent } from './view-notifications/view-notificati
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewTaskByUserComponent } from './view-task-by-user/view-task-by-user.component';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     ViewNotificationsComponent,
     DashboardComponent,
     ViewTaskByUserComponent,
+    UserDropdownComponent,
   ],
   imports: [
     BrowserModule,

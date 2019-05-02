@@ -6,7 +6,9 @@
         <option disabled="" selected="">Choose your option</option>
         <option value="{{user.id}}" *ngFor="let user of users">{{user.username}}</option>
     </select>
+    <!-- <app-user-dropdown (userSelect)='task.assignedTo=$event'></app-user-dropdown> -->
 
+    
     <input type="text" id="textInput" class="form-control mb-4" placeholder="Task Description" [(ngModel)]="task.title">
 
     <label class="example-input-wrapper">

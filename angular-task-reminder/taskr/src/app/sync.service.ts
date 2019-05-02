@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
-const BASE_URL = 'http://localhost:8000/'
+const BASE_URL = 'http://localhost:8000/';
 @Injectable({
   providedIn: 'root'
 })
