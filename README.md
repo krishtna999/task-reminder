@@ -1,20 +1,20 @@
 # Task Reminder System
 
 
-###Uses
+### Uses
 
 - Django Rest Framework (DRF)
 - Angular 7
 - Celery (Redis)
 
 
-###Install Dependencies 
+### Install Dependencies 
 
 - `pip install -r requirements.txt` in Django api  root folder 
 
 - `npm install` in Angular "taskr" root folder
 
-###Run Celery
+### Run Celery
 
 - ` celery -A api worker --loglevel=info` in Django api root folder
 
