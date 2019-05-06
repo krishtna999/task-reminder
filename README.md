@@ -18,4 +18,4 @@
 
 - ` celery -A api worker --loglevel=info` in Django api root folder
 
-- Make sure that redis runs at port 6379 so that celery and django can interact with it
+- Make sure that redis runs at port 6379 (default port for redis) so that celery and django can interact with it
